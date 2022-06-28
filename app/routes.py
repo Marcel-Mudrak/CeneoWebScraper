@@ -58,7 +58,6 @@ def author():
 def extract():
     if request.method == "POST":
         product_id = request.form.get("idInput")
-        # 130267228
         try:
             return opinions(product_id)
         except ValueError:
@@ -96,12 +95,18 @@ def product(product_id):
     plt.savefig(f'app/static/plots/{product_id}_rcmd.png', dpi = 500, transparent=True)
     plt.close()
     stars = opinions["score"].value_counts(
-        dropna=False).sort_index().reindex(np.arange(0,5.5,0.5))
+        dropna=False).sort_index().reindex(np.arange(0.5,5.5,0.5))
+
+    r = '#F94C66'
+    y = '#FFC54D'
+    g = '#53BF9D'
+    colors = [r, r, r, r, r, y, y, y, g, g, g]
+
     stars.plot.bar(
         label = "",
         xlabel = "Stars values",
         ylabel = "Opinions count",
-        color = "#F94C66",
+        color = colors,
         rot = 0
     )
     plt.savefig(f"app/static/plots/{product_id}_stars.png", dpi = 500, transparent=True)
