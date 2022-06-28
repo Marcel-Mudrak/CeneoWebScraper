@@ -1,0 +1,27 @@
+{% extends 'base.html.jinja' %}
+{% block content %}
+    <div class="mb-3">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <span class="fs-4">Ceneo Web Scraper</span>
+          </a>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{url_for('extract')}}" class="nav-link active">Extract opinions</a></li>
+            <li class="nav-item"><a href="{{url_for('products')}}" class="nav-link">Products list</a></li>
+            <li class="nav-item"><a href="{{url_for('author')}}" class="nav-link">About author</a></li>
+          </ul>
+        </header>
+      </div>
+    <h2>Products extraction</h2>
+    <form>
+        <div class="mb-3">
+            <label for="idInput" class="form-label">Ceneo product ID</label>
+            <input type="text" class="form-control" id="idInput">
+        </div>
+        <div class="fixed-left">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock content %}
