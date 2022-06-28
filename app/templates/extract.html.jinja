@@ -14,14 +14,23 @@
           </ul>
         </header>
       </div>
+
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-heartbreak-fill"></i> <strong>{{error}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+      
     <h2>Products extraction</h2>
-    <form>
+
+    <form action="{{url_for('extract')}}" method="POST">
         <div class="mb-3">
-            <label for="idInput" class="form-label">Ceneo product ID</label>
-            <input type="text" class="form-control" id="idInput">
+            <label for="idInput" class="form-label">Product ID</label>
+            <input type="text" class="form-control" id="idInput" name="idInput">
         </div>
         <div class="fixed-left">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
         </div>
     </form>
 {% endblock content %}

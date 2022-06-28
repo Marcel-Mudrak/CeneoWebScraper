@@ -44,17 +44,26 @@ opinion_elements = {
 }
 
 @app.route('/')
-
 def index():
-    name = 'Marcel Mudrak'
-    return render_template('index.html.jinja', name=name)
+    if not os.path.exists("app/opinions"):
+        os.makedirs("app/opinions")
+
+    return render_template('index.html.jinja')
 
 @app.route('/author')
 def author():
     return render_template("author.html.jinja")
 
-@app.route('/extract')
+@app.route('/extract', methods=["POST", "GET"])
 def extract():
+    if request.method == "POST":
+        product_id = request.form.get("idInput")
+        # 130267228
+        try:
+            return opinions(product_id)
+        except ValueError:
+            return render_template("extract.html.jinja")
+    
     return render_template("extract.html.jinja")
 
 @app.route('/products')
@@ -64,7 +73,10 @@ def products():
 
 @app.route('/product/<product_id>')
 def product(product_id):
+    plt.switch_backend('Agg')
+
     opinions = pd.read_json(f"app/opinions/{product_id}.json")
+
     stats={
         "opinions_count": len(opinions),
         "pros_count": opinions["pros"].map(bool).sum(),
@@ -76,31 +88,29 @@ def product(product_id):
     recommendations = opinions["rcmd"].value_counts(
         dropna=False).sort_index().reindex([False, True, None])
     recommendations.plot.pie(
-        label = "",
-        title = "Recommendations: "+product_id,
-        labels = ["Not recommend", "Recommend", "No opinion"],
-        colors = ["crimson", "forestgreen", "grey"],
-        autopct = lambda p: f"{p:.1f}%" if p>0 else ""
+        label = '',
+        labels = ['Not recommend', 'Recommend', 'No opinion'],
+        colors = ['#F94C66', '#53BF9D', '#FFC54D'],
+        autopct = lambda p: '{:.1f}%'.format(p) if p > 0 else ''
     )
-    plt.savefig(f"app/static/plots/{product_id}_rcmd.png")
+    plt.savefig(f'app/static/plots/{product_id}_rcmd.png', dpi = 500, transparent=True)
     plt.close()
     stars = opinions["score"].value_counts(
         dropna=False).sort_index().reindex(np.arange(0,5.5,0.5))
     stars.plot.bar(
         label = "",
-        title = "Stars score: "+product_id,
         xlabel = "Stars values",
         ylabel = "Opinions count",
-        color = "hotpink",
+        color = "#F94C66",
         rot = 0
     )
-    plt.savefig(f"app/static/plots/{product_id}_stars.png")
+    plt.savefig(f"app/static/plots/{product_id}_stars.png", dpi = 500, transparent=True)
     plt.close()
     return render_template("product.html.jinja", product_id=product_id, stats=stats, opinions=opinions)
 
-@app.route('/opinions', methods=["POST"])
-def opinions():
-    product_id = request.form.get("product_id")
+@app.route('/opinions')
+def opinions(product_id):
+    # product_id = request.form.get("product_id")
     url = f"https://www.ceneo.pl/{product_id}#tab=reviews"
     all_opinions = []
     while (url):
