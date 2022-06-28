@@ -11,7 +11,7 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
-<body>
+<body background="{{ url_for('static', filename='bg.jpg') }}">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <symbol id="facebook" viewBox="0 0 16 16">
         <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
@@ -27,20 +27,6 @@
       </symbol>
     </svg>
     <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <span class="fs-4">Ceneo Web Scraper</span>
-          </a>
-
-          <ul class="nav nav-pills">
-            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="{{url_for('extract')}}" class="nav-link">Extract opinions</a></li>
-            <li class="nav-item"><a href="{{url_for('products')}}" class="nav-link">Products list</a></li>
-            <li class="nav-item"><a href="{{url_for('author')}}" class="nav-link">About author</a></li>
-          </ul>
-        </header>
-      </div>
-    <div class="container">
             <div class="fixed-left">
                 <div class="col-3">
                     {% block sidebar %}
@@ -54,18 +40,19 @@
                 </div>
             </div>
         </div>
+    </div>
     <div class="container fixed-bottom">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
         <div class="col-md-4 d-flex align-items-center">
           <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
           </a>
-          <span class="text-muted">&copy; 2021 Company, Inc</span>
+          <span class="text-dark">&copy; Marcel Mudrak 2022</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-muted" href="https://github.com/Marcel-Mudrak"><svg class="bi" width="24" height="24"><use xlink:href="#github"/></svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/uekrakow/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="https://www.facebook.com/uek.uniwersytetekonomiczny/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://github.com/Marcel-Mudrak" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#github"/></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/uekrakow/" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://www.facebook.com/uek.uniwersytetekonomiczny/" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
   </footer>
 </div>

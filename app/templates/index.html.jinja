@@ -1,9 +1,22 @@
 {% extends 'base.html.jinja' %}
 {% block content %}
-	<div class="container">
+	<div class="mb-3">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <span class="fs-4">Ceneo Web Scraper</span>
+          </a>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{url_for('extract')}}" class="nav-link">Extract opinions</a></li>
+            <li class="nav-item"><a href="{{url_for('products')}}" class="nav-link">Products list</a></li>
+            <li class="nav-item"><a href="{{url_for('author')}}" class="nav-link">About author</a></li>
+          </ul>
+        </header>
+      </div>
 	<h2>Project description</h2>
         <ul class="list-group fixed">
-          <li class="list-group-item active" aria-current="true">Stages of the project</li>
+          <li class="list-group-item active opacity-60" aria-current="true">Stages of the project</li>
         </ul>
         <ul class="list-group list-group-numbered">
           <li class="list-group-item">Extraction of elements for a single opinion to separate variables</li>
@@ -15,5 +28,4 @@
           <li class="list-group-item">Translation of certain opinion's elements into English</li>
           <li class="list-group-item">Analysis of extracted opinions</li>
         </ul>
-    </div> 
 {% endblock content %}
