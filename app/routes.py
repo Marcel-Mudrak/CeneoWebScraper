@@ -92,6 +92,7 @@ def product(product_id):
         colors = ['#F94C66', '#53BF9D', '#FFC54D'],
         autopct = lambda p: '{:.1f}%'.format(p) if p > 0 else ''
     )
+    plt.tight_layout()
     plt.savefig(f'app/static/plots/{product_id}_rcmd.png', dpi = 500, transparent=True)
     plt.close()
     stars = opinions["score"].value_counts(
@@ -100,7 +101,7 @@ def product(product_id):
     r = '#F94C66'
     y = '#FFC54D'
     g = '#53BF9D'
-    colors = [r, r, r, r, r, y, y, y, g, g, g]
+    colors = [r, r, r, r, y, y, y, g, g, g]
 
     stars.plot.bar(
         label = "",
@@ -109,6 +110,7 @@ def product(product_id):
         color = colors,
         rot = 0
     )
+    plt.tight_layout()
     plt.savefig(f"app/static/plots/{product_id}_stars.png", dpi = 500, transparent=True)
     plt.close()
     return render_template("product.html.jinja", product_id=product_id, stats=stats, opinions=opinions)
